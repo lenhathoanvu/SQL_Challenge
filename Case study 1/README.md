@@ -16,7 +16,7 @@ Danny has shared with you 3 key datasets for this case study:
 - ```menu```
 - ```members```
 
-## Entity Relationship Diagram
+### Entity Relationship Diagram
 
 ![image](https://github.com/lenhathoanvu/SQL_Challenge/assets/173127058/3fc41857-ce1d-404a-9bd5-48fea02339ca)
 
