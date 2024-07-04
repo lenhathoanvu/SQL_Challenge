@@ -20,7 +20,6 @@ Danny has shared with you 3 key datasets for this case study:
 
 ![image](https://github.com/lenhathoanvu/SQL_Challenge/assets/173127058/3fc41857-ce1d-404a-9bd5-48fea02339ca)
 
-## Example Datasets
 ### Table 1: sales
 The ```sales``` table captures all ```customer_id``` level purchases with a corresponding ```order_date``` and ```product_id``` information for when and what menu items were ordered.
 
