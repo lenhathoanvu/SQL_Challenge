@@ -81,7 +81,7 @@ on s.product_id = m.product_id
 where me.join_date > s.order_date
 group by s.customer_id;
 
--- 9. If each $1 spent equates to 10 points and sushi has a x2 points multiplier — how many points would each customer have?
+-- 9. If each $1 spent equates to 10 points and sushi has a x2 points multiplier â€” how many points would each customer have?
 With Points_cte as (
 select *, case when product_id = 1 then price * 10 * 2
 		else price * 10 
@@ -98,7 +98,7 @@ group by s.customer_id;
 select s.customer_id,
 sum(
 	case 
-		when s.order_date between me.join_date and dateadd(day, 6, mem.join_date)
+		when s.order_date between me.join_date and dateadd(day, 6, me.join_date)
 		then price*10*2
 		when product_name = 'sushi' then price*10*2
 		else price*10
