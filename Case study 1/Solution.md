@@ -1,4 +1,4 @@
-# # <p align="center" style="margin-top: 0px;"> SOLUTION 
+# <p align="center" style="margin-top: 0px;"> SOLUTION 
 ## 1. What is the total amount each customer spent at the restaurant?
 
 ```sql
