@@ -1,7 +1,7 @@
 # SQL Challenge 
 SQL Challenge is a self-paced, community-driven initiative designed to help individuals improve their SQL skills through practical, real-world scenarios. Participants are given a new business problem, which they solve using SQL.
 
-## [Case study 1: Danny’s Diner](https://github.com/lenhathoanvu/SQL_Challenge/edit/master/README.md) 
+## [Case study 1: Danny’s Diner](https://github.com/lenhathoanvu/SQL_Challenge/blob/master/Case%20study%201/README.md) 
 The SQL journey kicks off with Danny’s Diner, a bustling eatery where the mission is to optimize the menu and streamline operations. Using SQL, I'll dive into the data to uncover insights that can help transform Danny’s Diner into a top-notch dining destination.
 
 ![image](https://github.com/lenhathoanvu/SQL_Challenge/assets/173127058/efc1863c-0777-4ffe-8cd7-5165792ea3d4)
