@@ -11,7 +11,7 @@ Afterward, I step into the fast-paced world of pizza delivery with Pizza Runner.
 
 ![image](https://github.com/lenhathoanvu/SQL_Challenge/assets/173127058/f05d14ef-4666-482b-b97f-8c010fb3d494)
 
-## Case study 3: Foodie-Fi 
+## [Case study 3: Foodie-Fi](https://github.com/lenhathoanvu/SQL_Challenge/tree/master/Case%20Study%203) 
 Foodie-Fi introduces us to the realm of subscription-based services, with a food-focused twist. SQL will guide us in understanding user behavior and answering crucial business questions in this subscription-style digital data case study.
 
 ![image](https://github.com/lenhathoanvu/SQL_Challenge/assets/173127058/ab4ac826-53e7-4fd2-970c-64aa655a0d0a)
