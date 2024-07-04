@@ -23,14 +23,17 @@ Danny has shared with you 3 key datasets for this case study:
 ## Example Datasets
 ### Table 1: sales
 The ```sales``` table captures all ```customer_id``` level purchases with a corresponding ```order_date``` and ```product_id``` information for when and what menu items were ordered.
+
 ![image](https://github.com/lenhathoanvu/SQL_Challenge/assets/173127058/bdcc2691-45f9-4196-8599-798f0c122142)
 
 ### Table 2: menu 
 The ```menu``` table maps the ```product_id``` to the actual ```product_name``` and ```price``` of each menu item.
+
 ![image](https://github.com/lenhathoanvu/SQL_Challenge/assets/173127058/2b6f1ff0-afce-422e-b53e-e92712c36755)
 
 ### Table 3: members
 The final ```members``` table captures the ```join_date``` when a ```customer_id``` joined the beta version of the Danny’s Diner loyalty program.
+
 ![image](https://github.com/lenhathoanvu/SQL_Challenge/assets/173127058/ae40d1c2-cdb7-4bab-ac36-9463cd0c1fdf)
 
 ## Case Study Questions
@@ -50,10 +53,12 @@ The final ```members``` table captures the ```join_date``` when a ```customer_id
 The following questions are related to creating basic data tables that Danny and his team can use to quickly derive insights without needing to join the underlying tables using SQL.
 
 Recreate the following table output using the available data:
+
 ![image](https://github.com/lenhathoanvu/SQL_Challenge/assets/173127058/49d47b38-bfdd-40d9-ac06-7be248be8d30)
 
 ### Rank All The Things
 Danny also requires further information about the ranking of customer products, but he purposely does not need the ranking for non-member purchases so he expects null ranking values for the records when customers are not yet part of the loyalty program.
+
 ![image](https://github.com/lenhathoanvu/SQL_Challenge/assets/173127058/422e920e-9224-4aea-ac69-17caaf964306)
 
 
