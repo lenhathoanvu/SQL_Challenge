@@ -98,7 +98,7 @@ group by s.customer_id;
 select s.customer_id,
 sum(
 	case 
-		when s.order_date between me.join_date and dateadd(day, 6, mem.join_date)
+		when s.order_date between me.join_date and dateadd(day, 6, me.join_date)
 		then price*10*2
 		when product_name = 'sushi' then price*10*2
 		else price*10
