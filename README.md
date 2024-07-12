@@ -1,4 +1,4 @@
-# SQL Challenge 
+# <p align = "center">SQL Challenge 
 SQL Challenge is a self-paced, community-driven initiative designed to help individuals improve their SQL skills through practical, real-world scenarios. Participants are given a new business problem, which they solve using SQL.
 
 ## [Case study 1: Danny’s Diner](https://github.com/lenhathoanvu/SQL_Challenge/tree/master/Case%20study%201) 
