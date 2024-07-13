@@ -19,6 +19,7 @@ All datasets exist within the ```pizza_runner``` database schema - be sure to in
 ![image](https://github.com/user-attachments/assets/afd6d60b-7055-4901-9be7-996120cb563a)
 ### Table 1: runners
 The ```runners``` table shows the ```registration_date``` for each new runner
+
 ![image](https://github.com/user-attachments/assets/d4a67070-1854-4ebe-8817-58f1fb4cb397)
 ### Table 2: customer_orders
 Customer pizza orders are captured in the ```customer_orders``` table with 1 row for each individual pizza that is part of the order.
