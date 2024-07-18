@@ -58,3 +58,14 @@ Alter column distance Decimal(5,1) Null
 
 Alter table runner_orders1
 Alter column durations int Null 
+
+-- Change several data types of columns
+
+Alter table pizza_toppings
+Alter column topping_name NVARCHAR(max)
+
+Alter table pizza_names
+Alter column pizza_name NVARCHAR(max)
+
+ALTER TABLE pizza_recipes
+ALTER COLUMN toppings VARCHAR(MAX);

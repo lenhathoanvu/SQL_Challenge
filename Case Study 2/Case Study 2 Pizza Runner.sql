@@ -14,7 +14,7 @@ Where cancellation is Null
 Group by runner_id
 
 -- 4. How many of each type of pizza was delivered?
-Select Cast(p.pizza_name as Nvarchar) AS pizza_name, 
+Select p.pizza_name AS pizza_name, 
 	Count(c.pizza_id) as TotalDelivered
 From pizza_names p
 Inner Join customer_orders1 c
@@ -22,17 +22,17 @@ Inner Join customer_orders1 c
 Inner Join runner_orders1 r
     on c.order_id = r.order_id
 Where r.cancellation is Null
-Group by Cast(p.pizza_name as Nvarchar)
+Group by p.pizza_name
 
 -- 5. How many Vegetarian and Meatlovers were ordered by each customer?
 Select c.customer_id,
-	Cast(p.pizza_name as Nvarchar) AS pizza_name, 
-	Count(c.order_id)
+	p.pizza_name as pizza_name, 
+	Count(c.order_id) as TotalOrdered
 From pizza_names p
 Inner Join customer_orders1 c
 	on p.pizza_id = c.pizza_id
 Group by c.customer_id,
-	Cast(p.pizza_name as Nvarchar)
+	p.pizza_name
 Order by c.customer_id
 
 -- 6. What was the maximum number of pizzas delivered in a single order?
@@ -166,11 +166,6 @@ Group by r.runner_id
 -- C. Ingredient Optimisation
 -- Preparing data for this part 
 -- Cleaning pizza_recipes 
-Alter table pizza_toppings
-Alter column topping_name NVARCHAR(max)
-
-Alter table pizza_names
-Alter column pizza_name NVARCHAR(max)
 
 Drop table if exists pizza_recipes1
 Select pr.pizza_id, 
@@ -220,7 +215,7 @@ Select * From extras
 Select pizza_id, 
 	String_agg(topping_name,',') as Standard_toppings
 From pizza_recipes1
-Group by pizza_id;	
+Group by pizza_id
 
 -- 2. What was the most commonly added extra?
 Select Top(1) p.topping_name, count(*) as added_extra_time
@@ -298,8 +293,7 @@ Where r.cancellation is Null
 -- 2. What if there was an additional $1 charge for any pizza extras? Add cheese is $1 extra
 Declare @basecost int = 138;
 
-Select Len(agg_extras), Len(Replace(agg_extras, ',', '')),
-    (Len(agg_extras) - Len(Replace(agg_extras, ',', '')) + 1) + @basecost as Total
+Select (Len(agg_extras) - Len(Replace(agg_extras, ',', '')) + 1) + @basecost as Total
 From (
     Select String_agg(c.extras, ',') as agg_extras
     From customer_orders1 c
