@@ -348,7 +348,7 @@ Alter table customer_orders1
 Add record_id int Identity(1,1)
 ```
 - *New Table*:
-- 
+
 ![image](https://github.com/user-attachments/assets/8ebc7cf4-e0f9-416e-a57d-3f1c6cf59145)
 
 #### Add new tables Exclusions and Extras 
