@@ -1,5 +1,3 @@
-![image](https://github.com/user-attachments/assets/f41c3903-ac6c-4e7e-985e-418e177684ee)# <p align = "center"> Solution
-
 ## <p align = "center"> Cleaning Data 
 ### Cleaning customer_orders 
 ```sql
@@ -198,7 +196,6 @@ Select Datepart(hour, order_time) as hour,
 From customer_orders1
 Group by Datepart(hour, order_time)
 ```
-
 Result
 
 ![image](https://github.com/user-attachments/assets/a15fa543-4251-4423-9ffe-a99fbfc2f8c6)
@@ -323,7 +320,7 @@ Result
 
 ## <p align='center'> C. Ingredient Optimisation
 ### Preparing data for this part 
-####Cleaning pizza_recipes
+#### Cleaning pizza_recipes
 ```sql
 Drop table if exists pizza_recipes1
 Select pr.pizza_id, 
@@ -419,10 +416,11 @@ Result
 ![image](https://github.com/user-attachments/assets/332846e0-e000-42c6-b270-c454241d7a78)
 
 ### 4. Generate an order item for each record in the customers_orders table in the format of one of the following:
-	- Meat Lovers
-	- Meat Lovers - Exclude Beef
-	- Meat Lovers - Extra Bacon
-	- Meat Lovers - Exclude Cheese, Bacon - Extra Mushroom, Peppers
+- Meat Lovers
+- Meat Lovers - Exclude Beef
+- Meat Lovers - Extra Bacon
+- Meat Lovers - Exclude Cheese, Bacon - Extra Mushroom, Peppers
+
 ```sql
 With exc_cte as 
 (
@@ -526,17 +524,17 @@ Result
 ![image](https://github.com/user-attachments/assets/f0a8a9cf-078a-48b7-a7c3-a32fbef53b9d)
 
 ### 4. Using your newly generated table - can you join all of the information together to form a table
-	- which has the following information for successful deliveries?
-	- customer_id
-	- order_id
-	- runner_id
-	- rating
-	- order_time
-	- pickup_time
-	- Time between order and pickup
-	- Delivery duration
-	- Average speed
-	- Total number of pizzas
+- which has the following information for successful deliveries?
+- customer_id
+- order_id
+- runner_id
+- rating
+- order_time
+- pickup_time
+- Time between order and pickup
+- Delivery duration
+- Average speed
+- Total number of pizzas
  
 ```sql
 Select c.customer_id, c.order_id, r1.runner_id, r2.rating, 
