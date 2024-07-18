@@ -150,7 +150,8 @@ Order by count(c.order_id) Desc
 ```
 Result
 
-![image](https://github.com/user-attachments/assets/75f0afbe-80e6-4605-a808-ae8d0d283b28)
+![image](https://github.com/user-attachments/assets/8647b898-8d7e-4d68-8092-4bc8c541a3e5)
+
 
 ### 7. For each customer, how many delivered pizzas had at least 1 change and how many had no changes?
 ```sql
