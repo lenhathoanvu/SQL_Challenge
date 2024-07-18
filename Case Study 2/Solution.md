@@ -1,4 +1,4 @@
-# <p align = "center"> Solution
+![image](https://github.com/user-attachments/assets/f41c3903-ac6c-4e7e-985e-418e177684ee)# <p align = "center"> Solution
 
 ## <p align = "center"> Cleaning Data 
 ### Cleaning customer_orders 
@@ -323,7 +323,7 @@ Result
 
 ## <p align='center'> C. Ingredient Optimisation
 ### Preparing data for this part 
-- Cleaning pizza_recipes
+####Cleaning pizza_recipes
 ```sql
 Drop table if exists pizza_recipes1
 Select pr.pizza_id, 
@@ -335,14 +335,239 @@ Cross Apply
     string_split(Cast(pr.toppings as nvarchar(max)), ',') as topping_id
 INNER JOIN pizza_toppings pt 
     on Ltrim(Rtrim(topping_id.value)) = pt.topping_id;
-
-Select * 
-From pizza_recipes1
 ```
-Original Table:
+- Original Table:
 
 ![image](https://github.com/user-attachments/assets/49944d25-86c4-473b-ac1a-dae76bbfa95d)
 
-New Table:
+- New Table:
 
 ![image](https://github.com/user-attachments/assets/d15f335b-a342-4ae6-b9fc-98c014bf0c64)
+
+#### Cleaning customer_orders
+```sql
+Alter table customer_orders1
+Add record_id int Identity(1,1)
+```
+- New Table:
+![image](https://github.com/user-attachments/assets/8ebc7cf4-e0f9-416e-a57d-3f1c6cf59145)
+
+#### Add new tables Exclusions and Extras 
+- New Exclusions table
+```sql
+Drop table if exists exclusions
+Select c.record_id,
+	Trim(exc.value) as topping_id
+Into exclusions 
+From customer_orders1 c
+Cross Apply
+	String_split(c.exclusions, ',')	as exc
+```
+Result
+
+![image](https://github.com/user-attachments/assets/34be407e-c1a8-47ca-86b4-d33d6bd77c30)
+
+- New Extras table
+```sql
+Drop table if exists extras
+Select c.record_id,
+	Trim(ext.value) as topping_id 
+Into extras
+From customer_orders1 c
+Cross Apply
+	String_split(c.extras,',') as ext
+```
+Result
+
+![image](https://github.com/user-attachments/assets/421d9e90-aca6-4cc2-a0fb-e65f96181ade)
+
+### 1. What are the standard ingredients for each pizza?
+```sql
+Select pizza_id, 
+	String_agg(topping_name,',') as Standard_toppings
+From pizza_recipes1
+Group by pizza_id
+```
+Result
+
+![image](https://github.com/user-attachments/assets/de995ae4-07a2-4e43-85f9-a3122b125dcf)
+
+### 2. What was the most commonly added extra?
+```sql
+Select Top(1) p.topping_name, count(*) as added_extra_time
+From extras e 
+Inner Join pizza_toppings p
+	on e.topping_id = p.topping_id
+Group by p.topping_name
+Order by count(*) desc
+```
+Result
+
+![image](https://github.com/user-attachments/assets/36adc94a-f5f8-499a-ab7e-21beb5913265)
+
+### 3. What was the most commonly exclusion?
+```sql
+Select Top(1) p.topping_name, count(*) as added_exclution_time
+From exclusions e
+Inner Join pizza_toppings p
+	on e.topping_id = p.topping_id
+Group by p.topping_name
+Order by count(*) desc
+```
+Result
+
+![image](https://github.com/user-attachments/assets/332846e0-e000-42c6-b270-c454241d7a78)
+
+### 4. Generate an order item for each record in the customers_orders table in the format of one of the following:
+	- Meat Lovers
+	- Meat Lovers - Exclude Beef
+	- Meat Lovers - Extra Bacon
+	- Meat Lovers - Exclude Cheese, Bacon - Extra Mushroom, Peppers
+```sql
+With exc_cte as 
+(
+	Select e.record_id, 
+		Concat(' - Exclude ', String_agg(p.topping_name, ', ')) as optional 	 
+	From exclusions e
+	Inner Join pizza_toppings p
+		on e.topping_id = p.topping_id
+	Group by e.record_id 
+),
+
+	ext_cte as
+(
+	select e.record_id,
+		Concat(' - Extra ', String_agg(p.topping_name, ', ')) as optional 
+	From extras e
+	Inner Join pizza_toppings p
+		on e.topping_id = p.topping_id
+	Group by e.record_id
+),
+
+	cte as
+(
+	Select * From exc_cte 
+	Union 
+	Select * From ext_cte
+)
+
+Select c.record_id, c.order_id, 
+	Concat(p.pizza_name, String_agg(optional, ',')) as order_item 
+From customer_orders1 c
+Inner Join pizza_names p
+	on p.pizza_id = c.pizza_id
+Left Join cte 
+	on c.record_id = cte.record_id
+Group by c.record_id, c.order_id, p.pizza_name
+```
+Result
+
+![image](https://github.com/user-attachments/assets/29fd7634-5ced-43f2-bb8e-8abf2b739366)
+
+## <p align='center'> D. Pricing and Ratings
+### 1. If a Meat Lovers pizza costs $12 and Vegetarian costs $10 and there were no charges for changes - how much money has Pizza Runner made so far if there are no delivery fees?
+```sql
+Select Sum(Case 
+		When pizza_name = 'Meatlovers' 
+		Then 12 
+		Else 10
+		End) as pizza_cost
+From pizza_names pn
+Inner Join customer_orders1 c
+	on c.pizza_id = pn.pizza_id
+Inner Join runner_orders1 r
+	on c.order_id = r.order_id
+Where r.cancellation is Null
+```
+Result 
+
+![image](https://github.com/user-attachments/assets/820c1acc-2049-4a4a-b25e-c936a3e19c8d)
+
+### 2. What if there was an additional $1 charge for any pizza extras? Add cheese is $1 extra
+```sql
+Declare @basecost int = 138;
+
+Select (Len(agg_extras) - Len(Replace(agg_extras, ',', '')) + 1) + @basecost as Total
+From (
+    Select String_agg(c.extras, ',') as agg_extras
+    From customer_orders1 c
+    Join runner_orders1 r 
+		on c.order_id = r.order_id
+    Where r.cancellation is Null
+) as subquery
+```
+Result
+
+![image](https://github.com/user-attachments/assets/64bcf028-73b8-4bd6-808e-3bbc942da8ab)
+
+### 3. The Pizza Runner team now wants to add an additional ratings system that allows customers to rate their runner, - how would you design an additional table for this new dataset - generate a schema for this new table and insert your own data for ratings for each successful customer order between 1 to 5.
+```sql
+Drop table if exists ratings
+Create table ratings 
+ (order_id int,
+    rating int);
+Insert into ratings
+ (order_id ,rating)
+Values 
+(1,4),
+(2,3),
+(3,5),
+(4,1),
+(5,2),
+(6,2),
+(7,4),
+(8,5),
+(9,3),
+(10,5)
+Select * From ratings
+```
+Result
+
+![image](https://github.com/user-attachments/assets/f0a8a9cf-078a-48b7-a7c3-a32fbef53b9d)
+
+### 4. Using your newly generated table - can you join all of the information together to form a table
+	- which has the following information for successful deliveries?
+	- customer_id
+	- order_id
+	- runner_id
+	- rating
+	- order_time
+	- pickup_time
+	- Time between order and pickup
+	- Delivery duration
+	- Average speed
+	- Total number of pizzas
+ 
+```sql
+Select c.customer_id, c.order_id, r1.runner_id, r2.rating, 
+	c.order_time, r1.pickup_time,
+	datediff(minute, order_time, pickup_time) as time_between_order_pickup,
+	r1.durations, 
+	Round(Avg(distance/durations*60),2) as avg_speed,
+	Count(pizza_id) as pizza_count
+From customer_orders1 c
+Left Join runner_orders1 r1
+	on c.order_id = r1.order_id
+Left Join ratings r2 
+	on c.order_id = r2.order_id
+Where r1.cancellation is Null
+Group by c.customer_id, c.order_id, r1.runner_id, r2.rating, 
+	c.order_time, r1.pickup_time, r1.durations,
+	datediff(minute, order_time, pickup_time)
+Order by customer_id
+```
+Result
+
+![image](https://github.com/user-attachments/assets/9b45be87-1e45-4d9e-9b67-1307935ebf30)
+
+### 5. If a Meat Lovers pizza was $12 and Vegetarian $10 fixed prices with no cost for extras and each runner is paid $0.30 per kilometre traveled - how much money does Pizza Runner have left over after these deliveries?
+```sql
+Declare @pizzaamountearned int = 138;
+select @pizzaamountearned as revenue,
+	sum(distance) * 0.3 as cost,
+	@pizzaamountearned - (sum(distance))*0.3 as profit
+from runner_orders1
+```
+Result
+
+![image](https://github.com/user-attachments/assets/610ec6bb-b1df-42cd-aef5-c9977a9e484f)
