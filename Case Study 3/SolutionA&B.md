@@ -1,6 +1,6 @@
 # <p align = "center"> Solution 
 
-## A. Customer Journey
+## <p align = "center"> A. Customer Journey
 
 Based off the 8 sample customers provided in the sample from the subscriptions table, write a brief description about each customer’s onboarding journey. Try to keep it as short as possible - you may also want to run some sort of join to make your explanations a bit easier!
 
@@ -16,7 +16,7 @@ order by customer_id
 
 ![image](https://github.com/lenhathoanvu/SQL_Challenge/assets/173127058/412be348-c9ef-4dd0-825a-49c61edf7d08)
 
-## B. Data Analysis Questions
+## <p align = "center"> B. Data Analysis Questions
 ### 1. How many customers has Foodie-Fi ever had?
 
 ```sql
