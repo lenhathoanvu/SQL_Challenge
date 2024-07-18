@@ -338,10 +338,10 @@ INNER JOIN pizza_toppings pt
 Select * 
 From pizza_recipes1
 ```
--- Original Table:
+Original Table:
 
 ![image](https://github.com/user-attachments/assets/49944d25-86c4-473b-ac1a-dae76bbfa95d)
 
--- New Table:
+New Table:
 
-![image](https://github.com/user-attachments/assets/22cf22bc-54e7-40be-9eeb-fa949748cfee)
+![image](https://github.com/user-attachments/assets/d15f335b-a342-4ae6-b9fc-98c014bf0c64)
