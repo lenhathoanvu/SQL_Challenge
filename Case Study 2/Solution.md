@@ -77,7 +77,7 @@ ALTER COLUMN toppings VARCHAR(MAX);
 Select Count(*) as TotalPizzaOrdered
 From customer_orders1
 ```
-Result 
+**Result** 
 
 ![image](https://github.com/user-attachments/assets/ecbf7720-6a82-479a-8629-b6fcc6f2369b)
 
@@ -86,7 +86,7 @@ Result
 Select Count(distinct order_id) as TotalOrdered
 From customer_orders1
 ```
-Result 
+**Result** 
 
 ![image](https://github.com/user-attachments/assets/5d9ed885-7c9c-418f-b677-dc17a8cf6ed7)
 
@@ -97,7 +97,7 @@ From runner_orders1
 Where cancellation is Null
 Group by runner_id
 ```
-Result
+**Result**
 
 ![image](https://github.com/user-attachments/assets/f90ee2f5-71da-43cc-bada-52279be08b4c)
 
@@ -114,7 +114,7 @@ Inner Join runner_orders1 r
 Where r.cancellation is Null
 Group by p.pizza_name
 ```
-Result 
+**Result** 
 
 ![image](https://github.com/user-attachments/assets/f08896a2-21eb-4ee7-803d-47dd81db1904)
 
@@ -130,7 +130,7 @@ Group by c.customer_id,
 	p.pizza_name
 Order by c.customer_id
 ```
-Result
+**Result**
 
 ![image](https://github.com/user-attachments/assets/747879eb-11d7-4be0-b5d4-f484941d3575)
 
@@ -146,7 +146,7 @@ Where r.cancellation is Null
 Group by r.order_id
 Order by count(c.order_id) Desc
 ```
-Result
+**Result**
 
 ![image](https://github.com/user-attachments/assets/8647b898-8d7e-4d68-8092-4bc8c541a3e5)
 
@@ -171,7 +171,7 @@ Where r.cancellation is Null
 Group by s.customer_id, status
 Order by s.customer_id
 ```
-Result
+**Result**
 
 ![image](https://github.com/user-attachments/assets/81938622-ced7-4eba-83a8-16de6f0eafb1)
 
@@ -185,7 +185,7 @@ Where r.cancellation is Null
 	and c.exclusions is not Null
 	and c.extras is not Null
 ```
-Result
+**Result**
 
 ![image](https://github.com/user-attachments/assets/f2355511-bab1-49a6-9e40-7a56246cf00c)
 
@@ -196,7 +196,7 @@ Select Datepart(hour, order_time) as hour,
 From customer_orders1
 Group by Datepart(hour, order_time)
 ```
-Result
+**Result**
 
 ![image](https://github.com/user-attachments/assets/a15fa543-4251-4423-9ffe-a99fbfc2f8c6)
 
@@ -207,7 +207,7 @@ Select Datename(Weekday, order_time) as weekday,
 From customer_orders1
 Group by Datename(Weekday, order_time)
 ```
-Result
+**Result**
 
 ![image](https://github.com/user-attachments/assets/751c7053-db02-4e68-afca-87c877464b44)
 
@@ -220,7 +220,7 @@ Select Datepart(Week, registration_date) as week,
 From runners
 Group by Datepart(Week, registration_date)
 ```
-Result
+**Result**
 
 ![image](https://github.com/user-attachments/assets/7045bd13-6e7c-495c-b5e5-8c603c0d633e)
 
@@ -234,7 +234,8 @@ Inner Join runner_orders1 r
 Where r.cancellation is Null 
 Group by r.runner_id
 ```
-Result
+**Result**
+
 ![image](https://github.com/user-attachments/assets/0c8fcfba-5ec7-45a6-84c8-2f901bc97cbc)
 
 ### 3. Is there any relationship between the number of pizzas and how long the order takes to prepare?
@@ -258,7 +259,7 @@ Select num_pizza,
 From cte
 group by num_pizza
 ```
-Result
+**Result**
 
 ![image](https://github.com/user-attachments/assets/8c844d81-d9a2-4daf-9707-254174f62192)
 
@@ -271,7 +272,7 @@ Inner Join runner_orders1 r
 	on c.order_id = r.order_id
 Group by c.customer_id
 ```
-Result
+**Result**
 
 ![image](https://github.com/user-attachments/assets/3858d03a-ee9b-43e2-a3b8-99b9da6ca60e)
 
@@ -282,7 +283,7 @@ From customer_orders1 c
 Inner Join runner_orders1 r
 	on c.order_id = r.order_id
 ```
-Result
+**Result**
 
 ![image](https://github.com/user-attachments/assets/32bffec3-350d-47c4-8f1b-438cfa606cfd)
 
@@ -296,7 +297,7 @@ Inner Join runner_orders1 r
 Where r.cancellation is Null
 Group by r.runner_id
 ```
-Result
+**Result**
 
 ![image](https://github.com/user-attachments/assets/8f9924c0-1821-41c4-b282-a8c8069e7eee)
 
@@ -314,7 +315,7 @@ Join runner_orders1 r
 	on c.order_id = r.order_id
 Group by r.runner_id
 ```
-Result
+**Result**
 
 ![image](https://github.com/user-attachments/assets/9d20d95d-5659-4bec-86e5-1a908f912593)
 
@@ -333,11 +334,11 @@ Cross Apply
 INNER JOIN pizza_toppings pt 
     on Ltrim(Rtrim(topping_id.value)) = pt.topping_id;
 ```
-- Original Table:
+- *Original Table*:
 
 ![image](https://github.com/user-attachments/assets/49944d25-86c4-473b-ac1a-dae76bbfa95d)
 
-- New Table:
+- *New Table*:
 
 ![image](https://github.com/user-attachments/assets/d15f335b-a342-4ae6-b9fc-98c014bf0c64)
 
@@ -346,11 +347,12 @@ INNER JOIN pizza_toppings pt
 Alter table customer_orders1
 Add record_id int Identity(1,1)
 ```
-- New Table:
+- *New Table*:
+- 
 ![image](https://github.com/user-attachments/assets/8ebc7cf4-e0f9-416e-a57d-3f1c6cf59145)
 
 #### Add new tables Exclusions and Extras 
-- New Exclusions table
+- **New Exclusions table**
 ```sql
 Drop table if exists exclusions
 Select c.record_id,
@@ -360,11 +362,11 @@ From customer_orders1 c
 Cross Apply
 	String_split(c.exclusions, ',')	as exc
 ```
-Result
+**Result**
 
 ![image](https://github.com/user-attachments/assets/34be407e-c1a8-47ca-86b4-d33d6bd77c30)
 
-- New Extras table
+- **New Extras table**
 ```sql
 Drop table if exists extras
 Select c.record_id,
@@ -374,7 +376,7 @@ From customer_orders1 c
 Cross Apply
 	String_split(c.extras,',') as ext
 ```
-Result
+**Result**
 
 ![image](https://github.com/user-attachments/assets/421d9e90-aca6-4cc2-a0fb-e65f96181ade)
 
@@ -385,7 +387,7 @@ Select pizza_id,
 From pizza_recipes1
 Group by pizza_id
 ```
-Result
+**Result**
 
 ![image](https://github.com/user-attachments/assets/de995ae4-07a2-4e43-85f9-a3122b125dcf)
 
@@ -398,7 +400,7 @@ Inner Join pizza_toppings p
 Group by p.topping_name
 Order by count(*) desc
 ```
-Result
+**Result**
 
 ![image](https://github.com/user-attachments/assets/36adc94a-f5f8-499a-ab7e-21beb5913265)
 
@@ -458,7 +460,7 @@ Left Join cte
 	on c.record_id = cte.record_id
 Group by c.record_id, c.order_id, p.pizza_name
 ```
-Result
+**Result**
 
 ![image](https://github.com/user-attachments/assets/29fd7634-5ced-43f2-bb8e-8abf2b739366)
 
@@ -477,8 +479,8 @@ Inner Join runner_orders1 r
 	on c.order_id = r.order_id
 Where r.cancellation is Null
 ```
-Result 
-
+**Result**
+ 
 ![image](https://github.com/user-attachments/assets/820c1acc-2049-4a4a-b25e-c936a3e19c8d)
 
 ### 2. What if there was an additional $1 charge for any pizza extras? Add cheese is $1 extra
@@ -494,7 +496,7 @@ From (
     Where r.cancellation is Null
 ) as subquery
 ```
-Result
+**Result**
 
 ![image](https://github.com/user-attachments/assets/64bcf028-73b8-4bd6-808e-3bbc942da8ab)
 
@@ -519,7 +521,7 @@ Values
 (10,5)
 Select * From ratings
 ```
-Result
+**Result**
 
 ![image](https://github.com/user-attachments/assets/f0a8a9cf-078a-48b7-a7c3-a32fbef53b9d)
 
@@ -554,7 +556,7 @@ Group by c.customer_id, c.order_id, r1.runner_id, r2.rating,
 	datediff(minute, order_time, pickup_time)
 Order by customer_id
 ```
-Result
+**Result**
 
 ![image](https://github.com/user-attachments/assets/9b45be87-1e45-4d9e-9b67-1307935ebf30)
 
@@ -566,6 +568,6 @@ select @pizzaamountearned as revenue,
 	@pizzaamountearned - (sum(distance))*0.3 as profit
 from runner_orders1
 ```
-Result
+**Result**
 
 ![image](https://github.com/user-attachments/assets/610ec6bb-b1df-42cd-aef5-c9977a9e484f)
