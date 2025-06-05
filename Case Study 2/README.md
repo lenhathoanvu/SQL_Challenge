@@ -122,3 +122,6 @@ Before you start writing your SQL queries however - you might want to investigat
 - Average speed
 - Total number of pizzas
 5. If a Meat Lovers pizza was $12 and Vegetarian $10 fixed prices with no cost for extras and each runner is paid $0.30 per kilometre traveled - how much money does Pizza Runner have left over after these deliveries?
+
+### Link Solution:
+[Solution.md](https://github.com/lenhathoanvu/SQL_Challenge/blob/master/Case%20Study%202/Solution.md)
